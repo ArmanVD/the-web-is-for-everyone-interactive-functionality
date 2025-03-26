@@ -5,8 +5,14 @@
         <button>Menu</button>
       </li>
       <li class="logo">
-        <a href="/">
-          <h1>Mediahuis</h1>
+        <a href="{% if radiostation %}/{{ radio.slug }}{% else %}/{% endif %}">
+          <h1>
+            {% if radiostation %}
+              {{ radiostation }}
+            {% else %}
+              Mediahuis
+            {% endif %}
+          </h1>
         </a>
       </li>
       <li>
