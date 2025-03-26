@@ -1,4 +1,18 @@
 {% render 'partials/head.liquid' %}
 <body>
   {% render 'partials/header.liquid' %}
+  <main>
+    <article class="initial-message">
+      <h2>Alle radiostations binnen handbereik</h2>
+      <h2>Kies je favoriet en luister direct!</h2>
+    </article>
+    <div class="radiostations">
+      <a href="/radio-veronica" class="card-veronica">
+        <div>
+          {% render 'svg/veronica.liquid' %}
+        </div>
+      </a>
+    </div>
+  </main>
   {% render 'partials/foot.liquid' %}
+</body>
