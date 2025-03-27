@@ -18,15 +18,38 @@ app.use(express.static("public"));
 // Stel Liquid in als 'view engine'
 const engine = new Liquid();
 app.engine("liquid", engine.express());
-
-// Stel de map met Liquid templates in
-// Let op: de browser kan deze bestanden niet rechtstreeks laden (zoals voorheen met HTML bestanden)
+app.set("view engine", "liquid");
 app.set("views", "./views");
 
-console.log("Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.");
+app.get("/", (req, res) => {
+  res.render("index", {
+    page: "home",
+  });
+});
 
-app.get("/", async (req, res) => {
-  res.render("index.liquid");
+app.get("/:station", async (req, res) => {
+  const station = req.params.station;
+
+  const allowedStations = ["radio-veronica", "slam-fm", "100-nl"];
+
+  if (!allowedStations.includes(station)) {
+    return res.status(404).render("404");
+  }
+
+  // nep data voor nu
+  const dummyData = {
+    "radio-veronica": { name: "Radio Veronica", slug: "radio-veronica" },
+    "slam-fm": { name: "SLAM! FM", slug: "slam-fm" },
+    "100-nl": { name: "100% NL", slug: "100-nl" },
+  };
+
+  const radioData = dummyData[station];
+
+  res.render("radio-template", {
+    page: "radio",
+    radiostation: radioData.name,
+    radio: radioData,
+  });
 });
 
 /*

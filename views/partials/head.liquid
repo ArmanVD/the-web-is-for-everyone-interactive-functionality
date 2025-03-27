@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luister naar jouw favoriete radiostation bij Mediahuis.">
     <title>
       Mediahuis{% if radiostation %}
         | {{ radiostation }}{% endif %}
     </title>
     <link rel="stylesheet" href="/css/global.css">
+    {% if page == 'home' %}
+      <link rel="stylesheet" href="/css/home.css">
+    {% elsif page == 'radio' %}
+      <link rel="stylesheet" href="/css/radio.css">
+    {% endif %}
     <link
       rel="icon"
       type="image/png"
