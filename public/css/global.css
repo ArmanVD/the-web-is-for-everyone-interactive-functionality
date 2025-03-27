@@ -83,8 +83,10 @@ a {
 header {
   display: flex;
   flex-direction: row;
-  height: 6svh;
-  width: 100svw;
+  height: 6vh;
+  height: 6dvh;
+  width: 100vw;
+  width: 100dvw;
   background-color: var(--activehovercolor);
   overflow: clip;
 
@@ -127,6 +129,10 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  height: 6vh;
+  height: 6dvh;
+  width: 100vw;
+  width: 100dvw;
   background-color: var(--activehovercolor);
   color: var(--text-light);
 }
