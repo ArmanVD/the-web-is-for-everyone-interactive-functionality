@@ -93,9 +93,4 @@ app.post(…, async function (request, response) {
 app.set("port", process.env.PORT || 8000);
 
 // Start Express op, gebruik daarbij het zojuist ingestelde poortnummer op
-app.listen(app.get("port"), function () {
-  // Toon een bericht in de console
-  console.log(
-    `Daarna kun je via http://localhost:${app.get("port")}/ jouw interactieve website bekijken.\n\nThe Web is for Everyone. Maak mooie dingen 🙂`
-  );
-});
+app.listen(app.get("port"), function () {});
