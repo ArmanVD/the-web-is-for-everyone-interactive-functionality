@@ -1,6 +1,6 @@
-{% render 'partials/head.liquid' %}
+{% include 'partials/head.liquid' %}
 <body>
-  {% render 'partials/header.liquid' %}
+  {% include 'partials/header.liquid' %}
   <main>
     <article class="initial-message">
       <h2>Alle radiostations binnen handbereik</h2>
@@ -16,6 +16,7 @@
         </div>
       </a>
     </div>
+    <p>Current page: {{ page }}</p>
   </main>
-  {% render 'partials/foot.liquid' %}
+  {% include 'partials/foot.liquid' %}
 </body>
