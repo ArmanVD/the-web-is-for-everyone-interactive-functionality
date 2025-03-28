@@ -27,11 +27,17 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 250px;
-  width: 350px;
+  min-width: 90%;
+  max-width: 350px;
+  aspect-ratio: 7 / 5;
   border-radius: 15px;
   background-color: light-dark(var(--transparent-light), var(--transparent-dark));
   backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 
   div {
     display: flex;
@@ -43,8 +49,8 @@ main {
   }
 
   .veronica-svg {
-    height: auto;
-    width: 292px;
+    height: 90%;
+    width: 90%;
     fill: var(--veronica);
   }
 }
