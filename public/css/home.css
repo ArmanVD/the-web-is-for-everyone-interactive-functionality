@@ -18,7 +18,7 @@ main {
 
 header,
 footer,
-.card-veronica {
+.card-radio-veronica {
   background-color: var(--transparent-light);
   color: var(--text-dark);
 }
@@ -43,7 +43,7 @@ header {
   color: var(--text-dark);
 }
 
-.card-veronica {
+.card-radio-veronica {
   display: flex;
   flex-direction: column;
   align-items: center;

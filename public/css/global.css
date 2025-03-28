@@ -143,6 +143,7 @@ header {
 
       li {
         color: light-dark(var(--text-light), var(--text-dark));
+        white-space: nowrap;
 
         &.logo {
           margin-inline-end: 2em;

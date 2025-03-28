@@ -1,6 +1,9 @@
-{% render 'partials/head.liquid' %}
+{% render 'partials/head.liquid'
+  , page: page
+  , radiostation: radiostation %}
 <body>
-  {% render 'partials/header.liquid' %}
+  {% render 'partials/header.liquid'
+    , radiostation: radiostation %}
   <main>
     <article class="initial-message">
       <h2>RAH</h2>

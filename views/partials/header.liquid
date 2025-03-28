@@ -4,11 +4,7 @@
       <li class="logo">
         <a href="{% if radiostation %}/{{ radio.slug }}{% else %}/{% endif %}">
           <h1 class="style-label">
-            {% if radiostation %}
-              {{ radiostation }}
-            {% else %}
-              Mediahuis
-            {% endif %}
+            {{ radiostation | default: "Mediahuis" }}
           </h1>
         </a>
       </li>

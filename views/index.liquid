@@ -7,14 +7,18 @@
       <p class="style2">Kies je favoriet en luister direct!</p>
     </article>
     <div class="radiostations">
-      <a
-        href="/radio-veronica"
-        class="card-veronica"
-        aria-label="Radio Veronica">
-        <div class="veronica-logo">
-          {% render 'svg/veronica.liquid' %}
-        </div>
-      </a>
+      {% for station in stations %}
+        {% if station.name == "Radio Veronica" %}
+          <a
+            href="/{{ station.slug }}"
+            class="card-{{ station.slug }}"
+            aria-label="{{ station.name }}">
+            <div class="veronica-logo">
+              {% render 'svg/veronica.liquid' %}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
     </div>
     <div class="background">
       <video
