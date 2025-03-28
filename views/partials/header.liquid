@@ -1,6 +1,6 @@
 <header>
   <nav>
-    <ul class="style-label">
+    <ul class="nav-top">
       <li class="logo">
         <a href="{% if radiostation %}/{{ radio.slug }}{% else %}/{% endif %}">
           <h1 class="style-label">
@@ -12,6 +12,17 @@
           </h1>
         </a>
       </li>
+      <li>
+        <button
+          class="menu-button"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="mainNavigation">
+          <span></span>
+        </button>
+      </li>
+    </ul>
+    <ul class="main-navigation style-label" id="mainNavigation">
       <li>
         <a href="/">Home</a>
       </li>

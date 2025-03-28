@@ -1,6 +1,19 @@
 const root = document.documentElement;
-
+const menuButton = document.querySelector(".menu-button"); // your menu button selector
+const nav = document.querySelector("header nav");
 const cards = document.querySelectorAll('[class^="card-"]');
+const mainNavigation = document.querySelector(".main-navigation.style-label");
+
+menuButton.addEventListener("click", () => {
+  const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
+  menuButton.setAttribute("aria-expanded", (!isExpanded).toString());
+
+  if (mainNavigation) {
+    mainNavigation.classList.toggle("active");
+  }
+
+  menuButton.classList.toggle("active");
+});
 
 cards.forEach((card) => {
   card.addEventListener("mouseenter", () => {
