@@ -1,5 +1,15 @@
 {% include 'partials/head.liquid' %}
 <body>
+  <div class="background">
+    <video
+      id="bg-video"
+      autoplay
+      muted
+      loop>
+      <source src="https://media.tmgvideo.nl/progressive/account=XIMsM-bLUxQB/item=a7kBPZWKSqMU/version=202502191515_8/a7kBPZWKSqMU.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
   {% include 'partials/header.liquid' %}
   <main>
     <article class="initial-message">
@@ -15,9 +25,6 @@
           {% render 'svg/veronica.liquid' %}
         </div>
       </a>
-    </div>
-    <div class="wave-svg">
-      {% render 'svg/wave.liquid' %}
     </div>
   </main>
   {% include 'partials/foot.liquid' %}

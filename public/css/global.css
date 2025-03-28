@@ -9,8 +9,8 @@
   --text-light: #1e1e1e;
   --text-dark: #f0f0f0;
 
-  --transparent-light: #1e1e1e25;
-  --transparent-dark: #f0f0f025;
+  --transparent-light: #1e1e1e20;
+  --transparent-dark: #f0f0f020;
 
   --mediahuis: #ff7c1a;
   --veronica: #005799;
@@ -124,9 +124,10 @@ header {
   height: 6dvh;
   width: 100vw;
   width: 100dvw;
-  background-color: var(--activehovercolor);
-  transition: background-color 0.5s ease-in-out;
+  background-color: light-dark(var(--transparent-light), var(--transparent-dark));
+  backdrop-filter: blur(10px);
   overflow: clip;
+  border-radius: 0 0 15px 15px;
 
   nav {
     width: 100%;
@@ -150,7 +151,7 @@ header {
       }
 
       li {
-        color: var(--text-light);
+        color: light-dark(var(--text-light), var(--text-dark));
 
         button {
           background-color: transparent;
@@ -171,9 +172,11 @@ footer {
   height: 6dvh;
   width: 100vw;
   width: 100dvw;
-  background-color: var(--activehovercolor);
-  transition: background-color 0.5s ease-in-out;
-  color: var(--text-light);
+  background-color: light-dark(var(--transparent-light), var(--transparent-dark));
+  backdrop-filter: blur(10px);
+  color: light-dark(var(--text-light), var(--text-dark));
   margin-top: auto;
   text-align: center;
+  z-index: 1;
+  border-radius: 15px 15px 0 0;
 }
