@@ -34,9 +34,39 @@
   --font-weight-black: 900;
   --font-weight-bold: 700;
   --font-weight-semi-bold: 600;
+  --font-weight-medium: 500;
   --font-weight-regular: 400;
 }
 
+.style1 {
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-bold);
+}
+
+.style2 {
+  font-size: var(--font-size-2);
+  font-weight: var(--font-weight-semi-bold);
+}
+
+.style3 {
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-medium);
+}
+
+.style-normal {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-regular);
+}
+
+.style-small {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+}
+
+.style-label {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-black);
+}
 /* latin-ext */
 @font-face {
   font-family: "Montserrat";
