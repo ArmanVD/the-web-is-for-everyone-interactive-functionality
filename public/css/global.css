@@ -179,4 +179,8 @@ footer {
   text-align: center;
   z-index: 1;
   border-radius: 15px 15px 0 0;
+
+  a {
+    color: var(--veronica);
+  }
 }
