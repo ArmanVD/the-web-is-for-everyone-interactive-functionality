@@ -39,7 +39,7 @@ main {
     transform: scale(1.03);
   }
 
-  div {
+  .veronica-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,5 +52,14 @@ main {
     height: 90%;
     width: 90%;
     fill: var(--veronica);
+  }
+}
+
+.wave-svg {
+  width: fit-content;
+  height: fit-content;
+
+  svg {
+    fill: var(--activehovercolor);
   }
 }
