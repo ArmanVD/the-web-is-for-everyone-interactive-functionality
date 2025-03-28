@@ -1,8 +1,15 @@
+html {
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  width: 100dvw;
+}
+
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2em;
+  gap: 3em;
   padding: 1em;
 }
 
@@ -12,4 +19,32 @@ main {
   align-items: center;
   text-align: center;
   gap: 0.5em;
+  padding-block-start: 3em;
+}
+
+.card-veronica {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 350px;
+  border-radius: 15px;
+  background-color: light-dark(var(--transparent-light), var(--transparent-dark));
+  backdrop-filter: blur(10px);
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .veronica-svg {
+    height: auto;
+    width: 292px;
+    fill: var(--veronica);
+  }
 }
