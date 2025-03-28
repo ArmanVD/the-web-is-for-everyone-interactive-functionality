@@ -125,6 +125,7 @@ header {
   width: 100vw;
   width: 100dvw;
   background-color: var(--activehovercolor);
+  transition: background-color 0.5s ease-in-out;
   overflow: clip;
 
   nav {
@@ -171,6 +172,7 @@ footer {
   width: 100vw;
   width: 100dvw;
   background-color: var(--activehovercolor);
+  transition: background-color 0.5s ease-in-out;
   color: var(--text-light);
   margin-top: auto;
   text-align: center;
