@@ -1,12 +1,62 @@
 {% render 'partials/head.liquid'
-  , page: page
+  , page: 'radio'
   , radiostation: radiostation %}
 <body data-page="{{ page }}" data-station="{{ radio.name | downcase | replace: ' ', '-' | replace: '%', 'percent' }}">
   {% render 'partials/header.liquid'
     , radiostation: radiostation %}
   <main>
     <aside class="left-sidebar">
-      <!-- LIVE section, current song, DJ, player controls, previous tracks -->
+      <ul class="sidebar-tabs">
+        <li>LIVE</li>
+        <li>STATIONS</li>
+      </ul>
+      <article class="now-playing">
+        <img src="/images/tory-lanez.jpeg" alt="Tory Lanez - Hurt From Mercury" />
+        <p class="dj-name">
+          <i class="icon-user"></i>
+          Sander Hoogendoorn
+        </p>
+        <h2 class="show-title">
+          GOUD VAN OUD
+        </h2>
+        <p class="song-title">
+          <i class="icon-music"></i>
+          Hurt From Mercury – Tory Lanez
+        </p>
+        <div class="player-controls">
+          <a href="#" class="watch-live">
+            <i class="icon-video"></i>
+            Kijk live
+          </a>
+          <button class="play-button">⏹️</button>
+          <a href="#" class="live-chat">
+            <i class="icon-chat"></i>
+            Live Chat
+          </a>
+        </div>
+      </article>
+      <article class="song-history">
+        <h3>Eerder op {{ radio.name }}</h3>
+        <ul>
+          <li class="now-playing">
+            <span class="time">Nu</span>
+            <img src="/images/tory-lanez.jpeg" alt="Hurt From Mercury" />
+            <div>
+              <strong>Hurt From Mercury</strong>
+              <p>Tory Lanez</p>
+            </div>
+          </li>
+          <li>
+            <span class="time">16:49</span>
+            <img src="/images/amy-winehouse.webp" alt="Back to Black" />
+            <div>
+              <strong>Back to Black</strong>
+              <p>Amy Winehouse</p>
+            </div>
+          </li>
+        </ul>
+        <a href="#" class="full-list-link">VOLLEDIGE LIJST →</a>
+      </article>
     </aside>
 
     <article class="radio-schedule">
