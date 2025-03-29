@@ -1,7 +1,7 @@
 {% render 'partials/head.liquid'
   , page: 'radio'
   , radiostation: radiostation %}
-<body data-page="{{ page }}" data-station="{{ radio.name | downcase | replace: ' ', '-' | replace: '%', 'percent' }}">
+<body data-page="{{ page }}" data-station="{{ radiostation | downcase | replace: ' ', '-' | replace: '%', 'percent' }}">
   {% render 'partials/header.liquid'
     , radiostation: radiostation %}
   <main>
@@ -32,7 +32,7 @@
         </div>
       </article>
       <article class="song-history">
-        <h3>Eerder op {{ radio.name }}</h3>
+        <h3>Eerder op {{ radiostation }}</h3>
         <ul>
           <li class="now-playing">
             <span class="time">Nu</span>
