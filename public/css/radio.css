@@ -1,0 +1,10 @@
+header,
+footer {
+  background-color: var(--activepagecolor);
+}
+
+footer {
+  a {
+    color: inherit;
+  }
+}

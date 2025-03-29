@@ -13,12 +13,12 @@
   --transparent-dark: #f0f0f040;
 
   --mediahuis: #ff7c1a;
-  --veronica: #005799;
-  --100-nl: #f08e04;
-  --slam-fm: #e50169;
-  --sublime: #98bf27;
+  --radio-veronica: #005799;
+  --radio-100-nl: #f08e04;
+  --radio-slam-fm: #e50169;
+  --radio-sublime: #98bf27;
 
-  --activehovercolor: var(--mediahuis);
+  --activepagecolor: var(--mediahuis);
 
   /* Fonts */
   --main-font: "Montserrat", sans-serif;
@@ -257,7 +257,7 @@ footer {
   border-radius: 15px 15px 0 0;
 
   a {
-    color: var(--veronica);
+    color: var(--radio-veronica);
   }
 }
 

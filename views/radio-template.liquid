@@ -1,13 +1,21 @@
 {% render 'partials/head.liquid'
   , page: page
   , radiostation: radiostation %}
-<body>
+<body data-page="{{ page }}" data-station="{{ radio.name | downcase | replace: ' ', '-' | replace: '%', 'percent' }}">
   {% render 'partials/header.liquid'
     , radiostation: radiostation %}
   <main>
-    <article class="initial-message">
-      <h2>RAH</h2>
+    <aside class="left-sidebar">
+      <!-- LIVE section, current song, DJ, player controls, previous tracks -->
+    </aside>
+
+    <article class="radio-schedule">
+      <!-- Program schedule, DJ’s, Playlist, Frequencies etc. -->
     </article>
+
+    <aside class="right-sidebar">
+      <!-- Highlights: Nieuws, Gemist, Frequenties -->
+    </aside>
   </main>
   {% render 'partials/foot.liquid' %}
 </body>

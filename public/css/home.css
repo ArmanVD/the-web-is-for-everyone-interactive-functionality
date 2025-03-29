@@ -25,9 +25,18 @@ footer,
 
 header {
   nav {
+    .main-navigation {
+      li {
+        button {
+          color: var(--text-dark);
+        }
+      }
+    }
     ul {
       li {
-        color: var(--text-dark);
+        a {
+          color: var(--text-dark);
+        }
       }
     }
   }
@@ -71,7 +80,7 @@ header {
   .veronica-svg {
     height: 90%;
     width: 90%;
-    fill: var(--veronica);
+    fill: var(--radio-veronica);
   }
 }
 
