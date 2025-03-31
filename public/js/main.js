@@ -63,38 +63,7 @@ dayButtons.forEach((button) => {
     const url = new URL(window.location.href);
     url.searchParams.set("date", selectedDate);
     history.replaceState(null, "", url);
-
-    const scheduleTimeline = document.querySelector(".schedule-timeline ul");
-    const currentScrollY = window.scrollY;
-
-    fetch(url.href)
-      .then((response) => response.text())
-      .then((html) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const newScheduleItems = doc.querySelectorAll(".schedule-timeline li");
-
-        newScheduleItems.forEach((item) => {
-          item.style.opacity = 0;
-          scheduleTimeline.appendChild(item);
-        });
-
-        const oldItems = scheduleTimeline.querySelectorAll("li:not([style*='opacity: 0'])");
-        oldItems.forEach((item) => {
-          item.style.transition = "opacity 0.2s";
-          item.style.opacity = 0;
-          setTimeout(() => item.remove(), 200);
-        });
-
-        newScheduleItems.forEach((item) => {
-          setTimeout(() => {
-            item.style.transition = "opacity 0.2s";
-            item.style.opacity = 1;
-          }, 200);
-        });
-
-        window.scrollTo(0, currentScrollY);
-      });
+    window.location.href = url;
   });
 });
 
