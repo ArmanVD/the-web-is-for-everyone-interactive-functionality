@@ -56,7 +56,103 @@
     </aside>
 
     <article class="radio-schedule">
-      <!-- Program schedule, DJ’s, Playlist, Frequencies etc. -->
+      <section class="schedule-tabs">
+        <ul>
+          <li class="active">PROGRAMMERING</li>
+          <li>DJ’S</li>
+          <li>PLAYLIST</li>
+          <li>FREQUENTIES</li>
+        </ul>
+      </section>
+
+      <section class="schedule-days">
+        <ul>
+          <li data-date="2025-03-31" data-weekday="1">
+            <button aria-label="Toon programmering voor maandag 31 maart">
+              <span class="day">Maa</span>
+              <span class="date">31</span>
+            </button>
+          </li>
+          <li
+            class="active"
+            data-date="2025-04-01"
+            data-weekday="2">
+            <button aria-label="Toon programmering voor dinsdag 1 april">
+              <span class="day">Din</span>
+              <span class="date">1</span>
+            </button>
+          </li>
+          <li data-date="2025-04-02" data-weekday="3">
+            <button aria-label="Toon programmering voor woensdag 2 april">
+              <span class="day">Woe</span>
+              <span class="date">2</span>
+            </button>
+          </li>
+          <li data-date="2025-04-03" data-weekday="4">
+            <button aria-label="Toon programmering voor donderdag 3 april">
+              <span class="day">Don</span>
+              <span class="date">3</span>
+            </button>
+          </li>
+          <li data-date="2025-04-04" data-weekday="5">
+            <button aria-label="Toon programmering voor vrijdag 4 april">
+              <span class="day">Vri</span>
+              <span class="date">4</span>
+            </button>
+          </li>
+          <li data-date="2025-04-05" data-weekday="6">
+            <button aria-label="Toon programmering voor zaterdag 5 april">
+              <span class="day">Zat</span>
+              <span class="date">5</span>
+            </button>
+          </li>
+          <li data-date="2025-04-06" data-weekday="0">
+            <button aria-label="Toon programmering voor zondag 6 april">
+              <span class="day">Zon</span>
+              <span class="date">6</span>
+            </button>
+          </li>
+        </ul>
+      </section>
+
+      <section class="schedule-timeline">
+        <div id="selected-date-info">
+          <h3>Programmering voor
+            <span id="selected-date-display">
+              {% if selected_day and selected_day.formatted_date %}
+                {{ selected_day.formatted_date }}
+              {% else %}
+                Selecteer een dag
+              {% endif %}
+            </span>
+          </h3>
+          <span id="selected-weekday" hidden></span>
+        </div>
+        {% if selected_day and selected_day.shows and selected_day.shows.size > 0 %}
+          <ul>
+            {% for show in selected_day.shows %}
+              <li
+                data-date="{{ show.date }}"
+                data-weekday="{{ show.weekday }}"
+                data-showid="{{ show.id }}">
+                <span class="time">{{ show.start_time }} - {{ show.end_time }}</span>
+                <div class="show-card">
+                  <img src="https://fdnd-agency.directus.app/assets/{{ show.thumbnail }}" alt="{{ show.name | default: 'Show afbeelding' }}" />
+                  <div class="show-info">
+                    <h4>{{ show.name }}</h4>
+                    {% if show.body %}
+                      <p>{{ show.body }}</p>
+                    {% endif %}
+                  </div>
+                  <button class="show-link" aria-label="Bekijk show {{ show.name }}">→</button>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="no-shows-message">Geen programma’s gevonden voor deze dag.</p>
+        {% endif %}
+      </section>
     </article>
 
     <aside class="right-sidebar">
