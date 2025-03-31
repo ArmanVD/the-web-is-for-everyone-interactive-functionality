@@ -1,4 +1,3 @@
-// Scroll position preservation
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
@@ -38,7 +37,7 @@ const scheduleItems = document.querySelectorAll(".schedule-timeline li");
 const dateDisplay = document.getElementById("selected-date-display");
 
 dayButtons.forEach((button) => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", async () => {
     const currentlyActive = document.querySelector(".schedule-days .active");
     if (currentlyActive) {
       currentlyActive.classList.remove("active");
@@ -59,23 +58,51 @@ dayButtons.forEach((button) => {
       dateDisplay.textContent = "Geen geldige datum";
     }
 
-    const selectedWeekday = button.getAttribute("data-weekday");
-    const scheduleItems = document.querySelectorAll(".schedule-timeline li");
-
-    scheduleItems.forEach((item) => {
-      if (item.getAttribute("data-weekday") === selectedWeekday) {
-        item.style.display = "flex";
-      } else {
-        item.style.display = "none";
-      }
-    });
-
-    const currentPath = window.location.pathname;
-    const url = new URL(window.location.origin + currentPath);
-    url.searchParams.set("date", selectedDate);
-    url.searchParams.set("weekday", selectedWeekday);
-
     sessionStorage.setItem("scrollY", window.scrollY);
-    window.location.href = url.toString();
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("date", selectedDate);
+    history.replaceState(null, "", url);
+
+    const scheduleTimeline = document.querySelector(".schedule-timeline ul");
+    const currentScrollY = window.scrollY;
+
+    fetch(url.href)
+      .then((response) => response.text())
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const newScheduleItems = doc.querySelectorAll(".schedule-timeline li");
+
+        newScheduleItems.forEach((item) => {
+          item.style.opacity = 0;
+          scheduleTimeline.appendChild(item);
+        });
+
+        const oldItems = scheduleTimeline.querySelectorAll("li:not([style*='opacity: 0'])");
+        oldItems.forEach((item) => {
+          item.style.transition = "opacity 0.2s";
+          item.style.opacity = 0;
+          setTimeout(() => item.remove(), 200);
+        });
+
+        newScheduleItems.forEach((item) => {
+          setTimeout(() => {
+            item.style.transition = "opacity 0.2s";
+            item.style.opacity = 1;
+          }, 200);
+        });
+
+        window.scrollTo(0, currentScrollY);
+      });
   });
 });
+
+const currentUrl = new URL(window.location.href);
+const currentWeekday = currentUrl.searchParams.get("weekday");
+
+if (page === "radio" && currentWeekday) {
+  document.querySelectorAll(".schedule-timeline li").forEach((item) => {
+    item.style.display = item.getAttribute("data-weekday") === currentWeekday ? "flex" : "none";
+  });
+}
