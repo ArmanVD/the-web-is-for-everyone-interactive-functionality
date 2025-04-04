@@ -115,10 +115,17 @@
         {% if selected_day and selected_day.shows and selected_day.shows.size > 0 %}
           <ul>
             {% for show in selected_day.shows %}
+              {% assign is_current = false %}
+              {% if show.start_minutes and show.end_minutes and currentMinutes %}
+                {% if show.start_minutes < currentMinutes and show.end_minutes > currentMinutes %}
+                  {% assign is_current = true %}
+                {% endif %}
+              {% endif %}
               <li
                 data-date="{{ show.date }}"
                 data-weekday="{{ show.weekday }}"
-                data-showid="{{ show.id }}">
+                data-showid="{{ show.id }}"
+                class="{% if is_current == true %}current-show{% endif %}">
                 <div class="show-card">
                   <div class="show-image">
                     <img src="https://fdnd-agency.directus.app/assets/{{ show.thumbnail }}" alt="{{ show.name | default: 'Show afbeelding' }}" />
@@ -131,7 +138,6 @@
                     {% endif %}
                     <span class="time style-label">{{ show.start_time }} - {{ show.end_time }}</span>
                   </div>
-                  <button class="show-link" aria-label="Bekijk show {{ show.name }}">→</button>
                 </div>
               </li>
             {% endfor %}
@@ -144,25 +150,25 @@
     <aside class="right-sidebar">
       <section class="highlights">
         <div class="highlights-header">
-          <h3>Highlights</h3>
-          <a href="#" class="show-all">Toon alles</a>
+          <h3 class="style2">Highlights</h3>
+          <a href="#" class="show-all style-label">Toon alles</a>
         </div>
         <article class="highlight">
           <img src="/images/kane.png" alt="KANE over comeback in Ook Goeiemorgen" />
           <div class="highlight-info">
-            <h4>KANE over comeback in Ook Goeiemorgen: 'Briljant om even...</h4>
+            <h4 class="style-label">KANE over comeback in Ook Goeiemorgen: 'Briljant om even...</h4>
           </div>
         </article>
         <article class="highlight">
           <img src="/images/the-indien.png" alt="The Indien speelt Be Yours" />
           <div class="highlight-info">
-            <h4>The Indien speelt Be Yours en nieuwe single Sleep When I'm ...</h4>
+            <h4 class="style-label">The Indien speelt Be Yours en nieuwe single Sleep When I'm ...</h4>
           </div>
         </article>
         <article class="highlight">
           <img src="/images/frequenties.png" alt="Check jouw nieuwe frequenties" />
           <div class="highlight-info">
-            <h4>Check jouw nieuwe frequenties met de FM-checker van Radio V...</h4>
+            <h4 class="style-label">Check jouw nieuwe frequenties met de FM-checker van Radio V...</h4>
           </div>
         </article>
       </section>

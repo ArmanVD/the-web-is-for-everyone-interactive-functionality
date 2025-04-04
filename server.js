@@ -113,6 +113,20 @@ app.get("/:station", async (req, res) => {
 
     console.log("Shows with times:", showsWithTimes);
     showsWithTimes.sort((a, b) => a.start_time.localeCompare(b.start_time));
+
+    function timeToMinutes(time) {
+      const [hours, minutes] = time.split(":").map(Number);
+      return hours * 60 + minutes;
+    }
+
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    showsWithTimes.forEach((show) => {
+      show.start_minutes = timeToMinutes(show.start_time);
+      show.end_minutes = timeToMinutes(show.end_time);
+    });
+
     res.render("radio-template", {
       page: "radio",
       radiostation: selectedStation.name,
@@ -124,6 +138,7 @@ app.get("/:station", async (req, res) => {
         date: day.date,
         shows: day.shows,
       })),
+      currentMinutes,
     });
   } catch (error) {
     console.error("Failed to fetch stations or shows:", error);
@@ -132,4 +147,6 @@ app.get("/:station", async (req, res) => {
 });
 
 app.set("port", process.env.PORT || 8000);
-app.listen(app.get("port"), function () {});
+app.listen(app.get("port"), function () {
+  console.log(`Server started on http://localhost:${app.get("port")}`);
+});

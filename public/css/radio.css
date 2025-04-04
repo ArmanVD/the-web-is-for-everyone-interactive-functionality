@@ -201,6 +201,10 @@ main {
         height: auto;
         padding: 0.25em;
 
+        &.current-show {
+          background-color: var(--activepagecolor);
+        }
+
         .show-card {
           display: flex;
           flex-direction: row;
@@ -223,7 +227,7 @@ main {
           .show-info {
             display: flex;
             flex-direction: column;
-            width: 70%;
+            width: 80%;
             padding-inline-start: 0.5em;
             gap: 0.25em;
 
@@ -236,12 +240,6 @@ main {
               padding-top: 2em;
             }
           }
-
-          .show-link {
-            width: 10%;
-            background-color: transparent;
-            border: none;
-          }
         }
       }
     }
@@ -249,5 +247,28 @@ main {
 }
 
 .right-sidebar {
-  display: none;
+  width: 100%;
+  .highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .highlights-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    article {
+      background-color: light-dark(var(--transparent-light), var(--transparent-dark));
+      padding: 1em;
+      border-radius: 15px;
+      word-break: keep-all;
+    }
+  }
 }
