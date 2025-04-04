@@ -43,9 +43,6 @@ menuButton.addEventListener("click", () => {
 const dayButtons = document.querySelectorAll(".schedule-days li");
 const scheduleItems = document.querySelectorAll(".schedule-timeline li");
 const dateDisplay = document.getElementById("selected-date-display");
-if (!dateDisplay) {
-  console.warn("Element with ID 'selected-date-display' not found.");
-}
 
 dayButtons.forEach((button) => {
   button.addEventListener("click", async () => {

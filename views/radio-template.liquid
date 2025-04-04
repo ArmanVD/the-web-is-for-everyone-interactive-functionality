@@ -124,11 +124,12 @@
                     <img src="https://fdnd-agency.directus.app/assets/{{ show.thumbnail }}" alt="{{ show.name | default: 'Show afbeelding' }}" />
                   </div>
                   <div class="show-info">
-                    <h4>{{ show.name }}</h4>
+                    <h4 class="style3">{{ show.name }}</h4>
                     {% if show.body %}
-                      <p>{{ show.body }}</p>
+                      <p class="style-normal">
+                        {{ show.body }}</p>
                     {% endif %}
-                    <span class="time">{{ show.start_time }} - {{ show.end_time }}</span>
+                    <span class="time style-label">{{ show.start_time }} - {{ show.end_time }}</span>
                   </div>
                   <button class="show-link" aria-label="Bekijk show {{ show.name }}">→</button>
                 </div>
@@ -168,6 +169,5 @@
     </aside>
   </main>
   {% assign formatted_date = selected_day.formatted_date | default: "Selecteer een dag" %}
-  <span id="selected-date-display">{{ formatted_date }}</span>
   {% render 'partials/foot.liquid' %}
 </body>

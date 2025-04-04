@@ -198,6 +198,8 @@ main {
         background-color: light-dark(var(--transparent-light), var(--transparent-dark));
         border-radius: 15px;
         width: 100%;
+        height: auto;
+        padding: 0.25em;
 
         .show-card {
           display: flex;
@@ -207,6 +209,8 @@ main {
           .show-image {
             width: 20%;
             padding: 0.5em;
+            border-right: 1px solid;
+            border-color: #8b8b8b;
 
             img {
               width: 60px;
@@ -217,11 +221,26 @@ main {
           }
 
           .show-info {
+            display: flex;
+            flex-direction: column;
             width: 70%;
+            padding-inline-start: 0.5em;
+            gap: 0.25em;
+
+            .style3 {
+              font-weight: var(--font-weight-bold);
+            }
+
+            .style-label {
+              margin-top: auto;
+              padding-top: 2em;
+            }
           }
 
           .show-link {
             width: 10%;
+            background-color: transparent;
+            border: none;
           }
         }
       }
