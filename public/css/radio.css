@@ -70,7 +70,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    padding-inline-start: 2em;
+    padding-inline-start: 1em;
+    margin-top: auto;
 
     h3 {
       font-weight: var(--font-weight-bold);
@@ -109,6 +110,10 @@ main {
           border-bottom: 1px solid;
           border-color: #8b8b8b;
         }
+      }
+
+      .TCV {
+        display: none;
       }
     }
 
@@ -270,5 +275,34 @@ main {
       border-radius: 15px;
       word-break: keep-all;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .left-sidebar {
+    grid-column: 1 / 2;
+
+    .song-history {
+      ul {
+        .TCV {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  .radio-schedule {
+    grid-column: 2 / 3;
+  }
+
+  .right-sidebar {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 50%;
   }
 }
