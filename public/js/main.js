@@ -8,6 +8,22 @@ if (savedScrollY !== null) {
   sessionStorage.removeItem("scrollY");
 }
 
+const page = document.body.dataset.page;
+const station = document.body.dataset.station;
+
+if (page === "radio" && station) {
+  const colorVar = `--${station}`;
+  document.documentElement.style.setProperty("--activepagecolor", `var(${colorVar})`);
+}
+
+const currentUrlDate = new URL(window.location.href).searchParams.get("date");
+if (currentUrlDate) {
+  const activeButton = document.querySelector(`.schedule-days li[data-date="${currentUrlDate}"]`);
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+}
+
 const root = document.documentElement;
 const menuButton = document.querySelector(".menu-button");
 const nav = document.querySelector("header nav");
@@ -24,17 +40,12 @@ menuButton.addEventListener("click", () => {
   menuButton.classList.toggle("active");
 });
 
-const page = document.body.dataset.page;
-const station = document.body.dataset.station;
-
-if (page === "radio" && station) {
-  const colorVar = `--${station}`;
-  document.documentElement.style.setProperty("--activepagecolor", `var(${colorVar})`);
-}
-
 const dayButtons = document.querySelectorAll(".schedule-days li");
 const scheduleItems = document.querySelectorAll(".schedule-timeline li");
 const dateDisplay = document.getElementById("selected-date-display");
+if (!dateDisplay) {
+  console.warn("Element with ID 'selected-date-display' not found.");
+}
 
 dayButtons.forEach((button) => {
   button.addEventListener("click", async () => {
@@ -48,12 +59,14 @@ dayButtons.forEach((button) => {
     const parts = selectedDate.split("-");
     const parsedDate = new Date(parts[0], parts[1] - 1, parts[2]);
     if (!isNaN(parsedDate)) {
-      dateDisplay.textContent = parsedDate.toLocaleDateString("nl-NL", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
+      if (dateDisplay) {
+        dateDisplay.textContent = parsedDate.toLocaleDateString("nl-NL", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
     } else {
       dateDisplay.textContent = "Geen geldige datum";
     }

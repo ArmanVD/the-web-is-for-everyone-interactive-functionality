@@ -6,58 +6,60 @@
     , radiostation: radiostation %}
   <main>
     <aside class="left-sidebar">
-      <ul class="sidebar-tabs">
-        <li>LIVE</li>
+      <ul class="sidebar-tabs style-label">
+        <li class="sidebar-active">LIVE</li>
         <li>STATIONS</li>
       </ul>
       <article class="now-playing">
         <img src="/images/tory-lanez.jpeg" alt="Tory Lanez - Hurt From Mercury" />
-        <p class="dj-name">
+        <p class="style-small">
           Sander Hoogendoorn
         </p>
-        <h2 class="show-title">
+        <h2 class="style2">
           GOUD VAN OUD
         </h2>
-        <p class="song-title">
+        <p class="style-small">
           Hurt From Mercury – Tory Lanez
         </p>
         <div class="player-controls">
-          <a href="#" class="watch-live">
+          <a href="#" class="style-label">
             Kijk live
           </a>
-          <button class="play-button">⏹️</button>
-          <a href="#" class="live-chat">
+          <button class="play-button"><img src="/assets/play-icon.svg" alt=""></button>
+          <a href="#" class="style-label">
             Live Chat
           </a>
         </div>
       </article>
       <article class="song-history">
-        <h3>Eerder op {{ radiostation }}</h3>
+        <h3 class="style3">Eerder op {{ radiostation }}</h3>
         <ul>
-          <li class="now-playing">
-            <span class="time">Nu</span>
+          <li class="now-playing-history">
+            <span class="time-active style-label">Nu</span>
             <img src="/images/tory-lanez.jpeg" alt="Hurt From Mercury" />
             <div>
-              <strong>Hurt From Mercury</strong>
-              <p>Tory Lanez</p>
+              <p class="style-label">Hurt From Mercury</p>
+              <p class="style-small">Tory Lanez</p>
             </div>
           </li>
-          <li>
+          <li class="now-playing-history">
             <span class="time">16:49</span>
             <img src="/images/amy-winehouse.webp" alt="Back to Black" />
             <div>
-              <strong>Back to Black</strong>
-              <p>Amy Winehouse</p>
+              <p class="style-label">Back to Black</p>
+              <p class="style-small">Amy Winehouse</p>
             </div>
           </li>
         </ul>
-        <a href="#" class="full-list-link">VOLLEDIGE LIJST →</a>
+        <a href="#" class="full-list-link style-label">VOLLEDIGE LIJST
+          <span>→</span>
+        </a>
       </article>
     </aside>
     <article class="radio-schedule">
       <section class="schedule-tabs">
-        <ul>
-          <li class="active">PROGRAMMERING</li>
+        <ul class="style-small">
+          <li class="style-label">PROGRAMMERING</li>
           <li>DJ’S</li>
           <li>PLAYLIST</li>
           <li>FREQUENTIES</li>
@@ -71,10 +73,7 @@
               <span class="date">31</span>
             </button>
           </li>
-          <li
-            class="active"
-            data-date="2025-04-01"
-            data-weekday="2">
+          <li data-date="2025-04-01" data-weekday="2">
             <button aria-label="Toon programmering voor dinsdag 1 april">
               <span class="day">Din</span>
               <span class="date">1</span>
@@ -113,18 +112,6 @@
         </ul>
       </section>
       <section class="schedule-timeline">
-        <div id="selected-date-info">
-          <h3>Programmering voor
-            <span id="selected-date-display">
-              {% if selected_day and selected_day.formatted_date %}
-                {{ selected_day.formatted_date }}
-              {% else %}
-                Selecteer een dag
-              {% endif %}
-            </span>
-          </h3>
-          <span id="selected-weekday" hidden></span>
-        </div>
         {% if selected_day and selected_day.shows and selected_day.shows.size > 0 %}
           <ul>
             {% for show in selected_day.shows %}
@@ -132,14 +119,16 @@
                 data-date="{{ show.date }}"
                 data-weekday="{{ show.weekday }}"
                 data-showid="{{ show.id }}">
-                <span class="time">{{ show.start_time }} - {{ show.end_time }}</span>
                 <div class="show-card">
-                  <img src="https://fdnd-agency.directus.app/assets/{{ show.thumbnail }}" alt="{{ show.name | default: 'Show afbeelding' }}" />
+                  <div class="show-image">
+                    <img src="https://fdnd-agency.directus.app/assets/{{ show.thumbnail }}" alt="{{ show.name | default: 'Show afbeelding' }}" />
+                  </div>
                   <div class="show-info">
                     <h4>{{ show.name }}</h4>
                     {% if show.body %}
                       <p>{{ show.body }}</p>
                     {% endif %}
+                    <span class="time">{{ show.start_time }} - {{ show.end_time }}</span>
                   </div>
                   <button class="show-link" aria-label="Bekijk show {{ show.name }}">→</button>
                 </div>
@@ -178,5 +167,7 @@
       </section>
     </aside>
   </main>
+  {% assign formatted_date = selected_day.formatted_date | default: "Selecteer een dag" %}
+  <span id="selected-date-display">{{ formatted_date }}</span>
   {% render 'partials/foot.liquid' %}
 </body>
