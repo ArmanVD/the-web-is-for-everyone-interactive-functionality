@@ -52,7 +52,16 @@ header {
   color: var(--text-dark);
 }
 
-.card-radio-veronica {
+.radiostations {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  padding: 1em;
+  overflow: scroll;
+}
+
+.radiocard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +77,7 @@ header {
     transform: scale(1.1);
   }
 
-  .veronica-logo {
+  .station-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,10 +86,9 @@ header {
     width: 100%;
   }
 
-  .veronica-svg {
+  .radiologo {
     height: 90%;
     width: 90%;
-    fill: var(--radio-veronica);
   }
 }
 

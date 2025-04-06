@@ -8,16 +8,16 @@
     </article>
     <div class="radiostations">
       {% for station in stations %}
-        {% if station.name == "Radio Veronica" %}
+        {% unless station.name == "Radio 1" or station.name == "Radio 2" or station.name == "test station" %}
           <a
             href="/{{ station.slug }}"
-            class="card-{{ station.slug }}"
+            class="radiocard"
             aria-label="{{ station.name }}">
-            <div class="veronica-logo">
-              {% render 'svg/veronica.liquid' %}
+            <div class="station-logo">
+              <img src="https://fdnd-agency.directus.app/assets/{{ station.logo }}" class="radiologo" alt="logo">
             </div>
           </a>
-        {% endif %}
+        {% endunless %}
       {% endfor %}
     </div>
     <div class="background">
