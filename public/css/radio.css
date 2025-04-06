@@ -306,3 +306,18 @@ main {
     width: 50%;
   }
 }
+
+@media (min-width: 1024px) {
+  main {
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+
+  .radio-schedule {
+    grid-column: 2/ 3;
+  }
+
+  .right-sidebar {
+    grid-column: 3 / 4;
+    width: 100%;
+  }
+}
