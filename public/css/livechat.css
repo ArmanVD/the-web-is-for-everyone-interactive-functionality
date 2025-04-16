@@ -30,8 +30,8 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  background-color: light-dark(var(--bg-dark), var(--bg-light));
-  color: light-dark(var(--text-dark), var(--text-light));
+  background-color: var(--activepagecolor);
+  color: light-dark(var(--text-light), var(--text-dark));
   padding: 3em;
   height: 80vh;
   height: 80dvh;
@@ -43,7 +43,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  background-color: light-dark(var(--bg-dark), var(--bg-light));
+  background-color: var(--activepagecolor);
   padding: 1.5em;
   border-radius: 1em;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
@@ -53,13 +53,13 @@ form {
 
 form label {
   font-weight: 600;
-  color: light-dark(var(--text-dark), var(--text-light));
+  color: light-dark(var(--text-light), var(--text-dark));
   margin-bottom: 0.25rem;
 }
 
 form input[type="text"] {
   padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 0.75rem;
   font-size: 1rem;
   transition: border-color 0.2s ease;
