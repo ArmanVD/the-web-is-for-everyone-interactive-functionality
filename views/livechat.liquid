@@ -1,0 +1,62 @@
+{% render 'partials/head.liquid'
+  , page: 'radio'
+  , radiostation: radiostation %}
+<body data-page="{{ page }}" data-station="{{ radiostation | downcase | replace: ' ', '-' | replace: '%', 'percent' }}">
+  {% render 'partials/header.liquid'
+    , radiostation: radiostation %}
+
+  <main>
+    <form
+      id="livechat-form"
+      method="POST"
+      action="/livechat">
+      <label for="sender">Name:</label>
+      <input
+        type="text"
+        id="sender"
+        name="sender"
+        placeholder="Your name"
+        required>
+
+      <label for="message">Message:</label>
+      <input
+        type="text"
+        id="message"
+        name="message"
+        placeholder="Type your message..."
+        required>
+
+      <button type="submit">Send</button>
+    </form>
+
+    <section id="chat-messages">
+      {% if messages and messages.size > 0 %}
+        {% for msg in messages %}
+          <p>
+            <strong>{{ msg.sender }}:</strong>
+            {{ msg.message }}
+            <br>
+            <small>{{ msg.date_created | date: "%a, %-d %b - %H:%M" }}</small>
+          </p>
+        {% endfor %}
+      {% else %}
+        <p>No messages yet.</p>
+      {% endif %}
+    </section>
+  </main>
+
+  <script>
+    setInterval(() => {
+      fetch('/livechat')
+        .then(response => response.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const newMessages = doc.querySelector('#chat-messages');
+          document.querySelector('#chat-messages').innerHTML = newMessages.innerHTML;
+        });
+    }, 5000);
+  </script>
+
+  {% render 'partials/foot.liquid' %}
+</body>

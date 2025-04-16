@@ -10,31 +10,47 @@ app.engine("liquid", engine.express());
 app.set("view engine", "liquid");
 app.set("views", "./views");
 
-app.get("/", async (req, res) => {
+app.get("/livechat", async (req, res) => {
   try {
-    const response = await fetch("https://fdnd-agency.directus.app/items/mh_radiostations");
-    const json = await response.json();
-    const stations = json.data;
+    const response = await fetch("https://fdnd-agency.directus.app/items/mh_chats", {
+      headers: {},
+    });
 
-    const slugify = (str) =>
-      str
-        .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/%/g, "percent")
-        .replace(/[^a-z0-9\-]/g, "");
+    const data = await response.json();
+    const messages = data.data;
 
-    const stationsWithSlugs = stations.map((station) => ({
-      ...station,
-      slug: slugify(station.name),
-    }));
-
-    res.render("index", {
-      page: "home",
-      stations: stationsWithSlugs,
+    res.render("livechat", {
+      page: "radio",
+      radiostation: "Live Chat",
+      messages,
     });
   } catch (error) {
-    console.error("Failed to fetch stations:", error);
-    res.status(500).send("Server error");
+    console.error("Failed to fetch chat messages:", error);
+    res.status(500).send("Error fetching chat messages.");
+  }
+});
+
+app.post("/livechat", async (req, res) => {
+  const { sender, message } = req.body;
+
+  try {
+    await fetch("https://fdnd-agency.directus.app/items/mh_chats", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sender,
+        message,
+        chathost: 2,
+        status: "draft",
+      }),
+    });
+
+    res.redirect("/livechat");
+  } catch (error) {
+    console.error("Failed to post chat message:", error);
+    res.status(500).send("Error posting chat message.");
   }
 });
 
@@ -61,7 +77,7 @@ app.get("/:station", async (req, res) => {
     const selectedStation = stationsWithSlugs.find((station) => station.slug === stationSlug);
 
     if (!selectedStation) {
-      return res.status(404).render("404");
+      return res.status(404).send("404 - Not Found");
     }
 
     const daysRes = await fetch("https://fdnd-agency.directus.app/items/mh_day?fields=*,shows.mh_shows_id.*.*");
@@ -142,6 +158,34 @@ app.get("/:station", async (req, res) => {
     });
   } catch (error) {
     console.error("Failed to fetch stations or shows:", error);
+    res.status(500).send("Server error");
+  }
+});
+
+app.get("/", async (req, res) => {
+  try {
+    const response = await fetch("https://fdnd-agency.directus.app/items/mh_radiostations");
+    const json = await response.json();
+    const stations = json.data;
+
+    const slugify = (str) =>
+      str
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/%/g, "percent")
+        .replace(/[^a-z0-9\-]/g, "");
+
+    const stationsWithSlugs = stations.map((station) => ({
+      ...station,
+      slug: slugify(station.name),
+    }));
+
+    res.render("index", {
+      page: "home",
+      stations: stationsWithSlugs,
+    });
+  } catch (error) {
+    console.error("Failed to fetch stations:", error);
     res.status(500).send("Server error");
   }
 });
