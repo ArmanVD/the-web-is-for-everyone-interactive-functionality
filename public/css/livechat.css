@@ -1,0 +1,88 @@
+html {
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+}
+
+header,
+footer {
+  background-color: var(--activepagecolor);
+}
+
+footer {
+  a {
+    color: inherit;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2em;
+  padding: 1em;
+  height: 100%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  background-color: light-dark(var(--bg-dark), var(--bg-light));
+  color: light-dark(var(--text-dark), var(--text-light));
+  padding: 3em;
+  height: 80vh;
+  height: 80dvh;
+  border-radius: 15px;
+  overflow: scroll;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background-color: light-dark(var(--bg-dark), var(--bg-light));
+  padding: 1.5em;
+  border-radius: 1em;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  height: 80vh;
+  height: 80dvh;
+}
+
+form label {
+  font-weight: 600;
+  color: light-dark(var(--text-dark), var(--text-light));
+  margin-bottom: 0.25rem;
+}
+
+form input[type="text"] {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+form input[type="text"]:focus {
+  outline: none;
+  border-color: #007aff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+form button {
+  background: #007aff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background: #005ecb;
+}

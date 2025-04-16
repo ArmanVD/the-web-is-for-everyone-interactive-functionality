@@ -10,6 +10,10 @@ app.engine("liquid", engine.express());
 app.set("view engine", "liquid");
 app.set("views", "./views");
 
+function sanitizeInput(input) {
+  return input.replace(/<script.*?>.*?<\/script>/gi, "[blocked]");
+}
+
 app.get("/livechat", async (req, res) => {
   try {
     const response = await fetch("https://fdnd-agency.directus.app/items/mh_chats", {
@@ -32,6 +36,8 @@ app.get("/livechat", async (req, res) => {
 
 app.post("/livechat", async (req, res) => {
   const { sender, message } = req.body;
+  const cleanSender = sanitizeInput(sender);
+  const cleanMessage = sanitizeInput(message);
 
   try {
     await fetch("https://fdnd-agency.directus.app/items/mh_chats", {
@@ -40,8 +46,8 @@ app.post("/livechat", async (req, res) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sender,
-        message,
+        sender: cleanSender,
+        message: cleanMessage,
         chathost: 2,
         status: "draft",
       }),
@@ -51,6 +57,26 @@ app.post("/livechat", async (req, res) => {
   } catch (error) {
     console.error("Failed to post chat message:", error);
     res.status(500).send("Error posting chat message.");
+  }
+});
+
+app.get("/delete-chat/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const response = await fetch(`https://fdnd-agency.directus.app/items/mh_chats/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      res.send(`Message with ID ${id} deleted`);
+    } else {
+      const err = await response.text();
+      res.status(400).send(`Failed to delete: ${err}`);
+    }
+  } catch (error) {
+    console.error("Error deleting chat message:", error);
+    res.status(500).send("Error deleting chat message.");
   }
 });
 

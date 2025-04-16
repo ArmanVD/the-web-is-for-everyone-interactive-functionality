@@ -1,11 +1,28 @@
 {% render 'partials/head.liquid'
-  , page: 'radio'
+  , page: 'livechat'
   , radiostation: radiostation %}
 <body data-page="{{ page }}" data-station="{{ radiostation | downcase | replace: ' ', '-' | replace: '%', 'percent' }}">
   {% render 'partials/header.liquid'
     , radiostation: radiostation %}
 
   <main>
+
+
+    <section id="chat-messages">
+      {% if messages and messages.size > 0 %}
+        {% for msg in messages %}
+          <p>
+            <strong>{{ msg.sender }}:</strong>
+            {{ msg.message }}
+            <br>
+            <small>{{ msg.date_created | date: "%a, %-d %b - %H:%M" }}</small>
+          </p>
+        {% endfor %}
+      {% else %}
+        <p>No messages yet.</p>
+      {% endif %}
+    </section>
+
     <form
       id="livechat-form"
       method="POST"
@@ -28,21 +45,6 @@
 
       <button type="submit">Send</button>
     </form>
-
-    <section id="chat-messages">
-      {% if messages and messages.size > 0 %}
-        {% for msg in messages %}
-          <p>
-            <strong>{{ msg.sender }}:</strong>
-            {{ msg.message }}
-            <br>
-            <small>{{ msg.date_created | date: "%a, %-d %b - %H:%M" }}</small>
-          </p>
-        {% endfor %}
-      {% else %}
-        <p>No messages yet.</p>
-      {% endif %}
-    </section>
   </main>
 
   <script>
@@ -55,7 +57,14 @@
           const newMessages = doc.querySelector('#chat-messages');
           document.querySelector('#chat-messages').innerHTML = newMessages.innerHTML;
         });
-    }, 5000);
+    }, 1000);
+
+    window.addEventListener('load', () => {
+    const chatSection = document.querySelector('section');
+    if (chatSection) {
+      chatSection.scrollTop = chatSection.scrollHeight;
+    }
+      });
   </script>
 
   {% render 'partials/foot.liquid' %}
