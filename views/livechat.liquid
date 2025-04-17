@@ -55,16 +55,37 @@
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
           const newMessages = doc.querySelector('#chat-messages');
-          document.querySelector('#chat-messages').innerHTML = newMessages.innerHTML;
+          const chatSection = document.querySelector('#chat-messages');
+          chatSection.innerHTML = newMessages.innerHTML;
+
+          chatSection.scrollTop = chatSection.scrollHeight;
         });
     }, 1000);
 
     window.addEventListener('load', () => {
-    const chatSection = document.querySelector('section');
-    if (chatSection) {
-      chatSection.scrollTop = chatSection.scrollHeight;
-    }
+      const chatSection = document.querySelector('#chat-messages');
+      if (chatSection) {
+        chatSection.scrollTop = chatSection.scrollHeight;
+      }
+    });
+
+    const form = document.getElementById('livechat-form');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const data = new URLSearchParams(formData);
+
+      await fetch('/livechat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: data
       });
+
+      form.message.value = '';
+    });
   </script>
 
   {% render 'partials/foot.liquid' %}
