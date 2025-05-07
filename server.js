@@ -142,8 +142,8 @@ app.get("/:station", async (req, res) => {
             name: show.name,
             body: show.body,
             thumbnail: show.thumbnail,
-            start_time: entry.mh_shows_id.from,
-            end_time: entry.mh_shows_id.until,
+            start_time: entry.mh_shows_id.from.slice(0, 5),
+            end_time: entry.mh_shows_id.until.slice(0, 5),
             id: entry.mh_shows_id.id,
             show_id: show.id,
             weekday: selectedDate
